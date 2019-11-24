@@ -15,6 +15,11 @@ public class AnimalTest {
     public void animal_nameInstantiatesCorrectly_String(){
         Animal animal = new Animal ("Lion", "young");
         assertEquals("Lion", animal.getName());
-
     }
-g}
+    @Test
+    public void animal_ageInstantiatesCorrectly_String(){
+        Animal animal = new Animal("Lion", "young");
+        assertEquals("young", animal.getAge());
+    }
+
+}
