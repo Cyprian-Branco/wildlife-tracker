@@ -3,7 +3,6 @@
     <!doctype html>
     <html lang="en">
     <head>
-        <title>{{#block "title"}}Wildlife Tracker{{/block}}</title>
         <meta charset="UTF-8">
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -17,7 +16,7 @@
 <body>
 <div>
     {{#block "nav"}}
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <nav class="nav-bar fixed-top navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="/">Wildlife Tracker</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,36 +33,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/endangered">Endangered Animals</a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link" href="/non-endangered">Non-Endangered Animals</a>
                     </li>
-
                 </ul>
-                <form class="form-inline">
-                    <div class="md-form my-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    </div>
-                </form>
             </div>
         </nav>
-
     {{/block}}
-
-
     <div id="content">
-        <!--begin main template-->
         {{#block "content"}}
         {{/block}}
     </div>
-
 </div>
-
-<!--end main template-->
 {{#block "footer"}}
     <footer class="footer">
         <div class="container">
-
         </div>
     </footer>
 {{/block}}
