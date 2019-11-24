@@ -21,5 +21,10 @@ public class AnimalTest {
         Animal animal = new Animal("Lion", "young");
         assertEquals("young", animal.getAge());
     }
-
+    @Test
+    public void equals_returnSameIfNameAndAgeAreSame_True(){
+        Animal animal = new Animal("Lion", "young");
+        Animal otherAnimal = new Animal("Lion", "young");
+        assertTrue(animal.equals(otherAnimal));
+    }
 }
