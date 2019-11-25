@@ -3,6 +3,7 @@ import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -30,6 +31,13 @@ public class App {
             newEndangeredAnimal.save();
             response.redirect("/");
             return null;
+        }), new HandlebarsTemplateEngine());
+
+        get("/endangered", ((request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Endangered> endangeredAnimals = Endangered.all();
+            model.put("endangeredAnimals", endangeredAnimals);
+            return new ModelAndView(model, "endangered-list.hbs");
         }), new HandlebarsTemplateEngine());
     }
 }
