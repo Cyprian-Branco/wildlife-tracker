@@ -27,4 +27,12 @@ public class AnimalTest {
         Animal otherAnimal = new Animal("Lion", "young");
         assertTrue(animal.equals(otherAnimal));
     }
+    @Test
+    public void save_assignsIdToObject(){
+        Animal animal = new Animal("Lion", "young");
+        animal.save();
+        Animal savedAnimal = Animal.all().get(0);
+        assertEquals(animal.getId(), savedAnimal.getId());
+    }
+
 }
