@@ -16,6 +16,16 @@ public class SightingTest {
         assertEquals("Mike", sighting.getRanger());
     }
 
-    
+    @Test
+
+    public void animalIdInstantiatesCorrectly_String(){
+        Sighting sighting = new Sighting("Mike", 2, "Tsavo");
+        assertEquals(2, sighting.getAnimalId());
+    }
+    @Test
+    public void locationInstantiatesCorrectly_String(){
+        Sighting sighting = new Sighting("Mike", 2, "Tsavo");
+        assertEquals("Tsavo", sighting.getLocation());
+    }
 
 }
