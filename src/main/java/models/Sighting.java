@@ -20,4 +20,24 @@ public class Sighting {
             throw new IllegalArgumentException("Please enter Ranger name.");
         }
     }
+
+    public String getRanger() {
+        return ranger;
+    }
+
+    public int getAnimalId() {
+        return animalId;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public Timestamp getSeenDate() {
+        return seenDate;
+    }
 }
