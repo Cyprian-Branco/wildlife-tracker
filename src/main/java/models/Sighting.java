@@ -55,5 +55,26 @@ public class Sighting {
                 Objects.equals(getSeenDate(), sighting.getSeenDate());
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRanger(), getAnimalId(), getLocation(), getSeenDate());
+    }
 
+    public void save() {
+        try (Connection con = DB.sql2o.open()) {
+            String sql = "INSERT INTO sightings (rangerName, animalId, location, sightingDate) VALUES (:rangerName, :animalId, :location, :sightingDate);";
+            this.id = (int) con.createQuery(sql, true)
+                    .addParameter("rangerName", this.ranger)
+                    .addParameter("animalId", this.animalId)
+                    .addParameter("location", this.location)
+                    .addParameter("sightingDate", this.seenDate)
+                    .executeUpdate()
+                    .getKey();
+        }catch (Sql2oException ex) {
+            System.out.println("found "+ex);
+        }
+
+    }
+
+    
 }
