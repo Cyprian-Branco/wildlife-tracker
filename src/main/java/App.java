@@ -74,6 +74,12 @@ public class App {
             model.put("sightings", sightings);
             return new ModelAndView(model, "sighting-view.hbs");
         }), new HandlebarsTemplateEngine());
+        get("/sightings/:id/delete", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            Sighting.find(Integer.parseInt(request.params(":id"))).delete();
+            response.redirect("/sightings");
+            return null;
+        }, new HandlebarsTemplateEngine());
     }
 }
 
