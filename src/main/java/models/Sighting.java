@@ -1,6 +1,9 @@
 package models;
 
+import org.sql2o.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -8,8 +11,8 @@ public class Sighting {
     private String ranger;
     private int animalId;
     private String location;
-    private int Id;
     private Timestamp seenDate;
+    private int id;
 
     public Sighting (String ranger, int animalId, String location){
         this.ranger = ranger;
@@ -38,13 +41,11 @@ public class Sighting {
         return seenDate;
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
+    public int getId() {
+        return id;
     }
-
     @Override
-    public boolean equals (Object o ) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sighting sighting = (Sighting) o;
@@ -54,4 +55,48 @@ public class Sighting {
                 Objects.equals(getSeenDate(), sighting.getSeenDate());
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRanger(), getAnimalId(), getLocation(), getSeenDate());
+    }
+
+    public void save() {
+        try (Connection con = DB.sql2o.open()) {
+            String sql = "INSERT INTO sightings (rangerName, animalId, location, sightingDate) VALUES (:rangerName, :animalId, :location, :sightingDate);";
+            this.id = (int) con.createQuery(sql, true)
+                    .addParameter("rangerName", this.ranger)
+                    .addParameter("animalId", this.animalId)
+                    .addParameter("location", this.location)
+                    .addParameter("sightingDate", this.seenDate)
+                    .executeUpdate()
+                    .getKey();
+        }catch (Sql2oException ex) {
+            System.out.println("found "+ex);
+        }
+
+    }
+
+    public static List<Sighting> all() {
+        String sql = "SELECT * FROM sightings;";
+        try (Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).throwOnMappingFailure(false).executeAndFetch(Sighting.class);
+        }
+    }
+
+    public static Sighting find(int id) {
+        try (Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM sightings where id = :id;";
+            Sighting sighting = con.createQuery(sql).addParameter("id", id).throwOnMappingFailure(false).executeAndFetchFirst(Sighting.class);
+            return sighting;
+
+        }
+    }
+
+    public void delete() {
+        try (Connection con = DB.sql2o.open()) {
+            String sql = "DELETE FROM sightings WHERE id = :id;";
+            con.createQuery(sql).addParameter("id", this.id).executeUpdate();
+
+        }
+    }
 }
