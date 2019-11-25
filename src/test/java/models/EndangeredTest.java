@@ -12,6 +12,18 @@ public class EndangeredTest {
         Endangered testEndangered = new Endangered("Rhino", "healthy", "young");
         assertTrue(testEndangered instanceof Endangered);
     }
-    
+    @Test
+    public void getName_EndangeredAnimalInstantiatesWithName_Rhino() {
+        Endangered testEndangered = new Endangered("Rhino", "healthy", "young");
+        assertEquals("Rhino", testEndangered.getName());
+    }
+    @Test
+    public void equalsReturnsTrueIfNameIsSame_true() {
+        Endangered testEndangered = new Endangered("Rhino", "healthy", "young");
+        Endangered otherEndangered = new Endangered("Rhino", "healthy", "young");
+        assertTrue(testEndangered.equals(otherEndangered));
+
+    }
+
 
 }
