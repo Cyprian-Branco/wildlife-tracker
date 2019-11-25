@@ -1,4 +1,5 @@
 import models.Endangered;
+import models.Sighting;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -28,29 +29,43 @@ public class App {
             String name = request.queryParams("name");
             String age = request.queryParams("age");
             String health = request.queryParams("health");
-            Endangered newEndangeredAnimal = new Endangered(name,age,health);
-            newEndangeredAnimal.save();
+            Endangered newEndangered = new Endangered(name,age,health);
+            newEndangered.save();
             response.redirect("/");
             return null;
         }), new HandlebarsTemplateEngine());
 
         get("/endangered", ((request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Endangered> endangeredAnimals = Endangered.all();
-            model.put("endangeredAnimals", endangeredAnimals);
+            List<Endangered> endangered = Endangered.all();
+            model.put("endangered ", endangered);
             return new ModelAndView(model, "endangered-list.hbs");
         }), new HandlebarsTemplateEngine());
-        
+
         get("/sighting/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Endangered> endangeredAnimals = Endangered.all();
+            List<Endangered> endangered = Endangered.all();
             List<Object> animals = new ArrayList<Object>();
-            for (int i = 0; i < endangeredAnimals.size(); i++) {
+            for (int i = 0; i < endangered.size(); i++) {
                 animals.add(Endangered.all().get(i));
             }
             model.put("animals",animals );
             return new ModelAndView(model, "sighting-form.hbs");
         }, new HandlebarsTemplateEngine());
+        post("/sighting/new", ((request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            String ranger = request.queryParams("ranger");
+            int animalId = Integer.parseInt(request.queryParams("animalId"));
+            String location = request.queryParams("location");
+            try {
+                Sighting sighting = new Sighting(ranger,animalId,location);
+                sighting.save();
+            } catch (IllegalArgumentException exception) {
+                System.out.println("Please fill in all input fields.");
+            }
+            response.redirect("/");
+            return null;
+        }), new HandlebarsTemplateEngine());
     }
 }
 
