@@ -1,3 +1,4 @@
+import models.Endangered;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -18,6 +19,17 @@ public class App {
         get("/endangered/new", ((request, response) -> {
             Map<String, Object> model = new HashMap<>();
             return new ModelAndView(model, "endangered-form.hbs");
+        }), new HandlebarsTemplateEngine());
+
+        post("/endangered/new", ((request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            String name = request.queryParams("name");
+            String age = request.queryParams("age");
+            String health = request.queryParams("health");
+            Endangered newEndangeredAnimal = new Endangered(name,age,health);
+            newEndangeredAnimal.save();
+            response.redirect("/");
+            return null;
         }), new HandlebarsTemplateEngine());
     }
 }
