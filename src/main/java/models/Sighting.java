@@ -76,5 +76,27 @@ public class Sighting {
 
     }
 
-    
+    public static List<Sighting> all() {
+        String sql = "SELECT * FROM sightings;";
+        try (Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).throwOnMappingFailure(false).executeAndFetch(Sighting.class);
+        }
+    }
+
+    public static Sighting find(int id) {
+        try (Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM sightings where id = :id;";
+            Sighting sighting = con.createQuery(sql).addParameter("id", id).throwOnMappingFailure(false).executeAndFetchFirst(Sighting.class);
+            return sighting;
+
+        }
+    }
+
+    public void delete() {
+        try (Connection con = DB.sql2o.open()) {
+            String sql = "DELETE FROM sightings WHERE id = :id;";
+            con.createQuery(sql).addParameter("id", this.id).executeUpdate();
+
+        }
+    }
 }
