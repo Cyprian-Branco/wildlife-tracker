@@ -1,11 +1,9 @@
 {{#partial "content"}}
     <div class="container">
         <div class="row container">
-            <div class="col-md-3"></div>
             <div class="col-md-6">
                 <div class="form-dark">
-                    <div class="card card-image"
-                         style="background-image: url('https://mdbootstrap.com/img/Photos/Others/pricing-table7.jpg'); width: 28rem;">
+                    <div class="card card-image" style="background-image: url('/images/download.jpg'); width: 28rem;">
                         <div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
                             <div class="text-center">
                                 <h3 class="amber-text mb-5 mt-4 font-weight-bold"><strong>ADD</strong> <a
@@ -20,6 +18,12 @@
                                 <br>
                                 <select class="browser-default custom-select" id="animalId" name="animalId">
                                     <option selected>Select Animal</option>
+                                    <option value="Zone A">Lion</option>
+                                    <option value="Zone B">Rhino</option>
+                                    <option value="Zone C">Leopard</option>
+                                    <option value="Zone A">Elephant</option>
+                                    <option value="Zone B">Giraffe</option>
+                                    <option value="Zone C">Cheetah</option>
                                     {{#each animals}}
                                         <option value="{{id}}">{{name}}</option>
                                     {{/each}}
@@ -29,9 +33,9 @@
                                 <br>
                                 <select class="browser-default custom-select" id="location" name="location">
                                     <option selected>Select Location</option>
-                                    <option value="Zone A">Zone A</option>
-                                    <option value="Zone B">Zone B</option>
-                                    <option value="Zone C">Zone C</option>
+                                    <option value="Zone A">Tsavo</option>
+                                    <option value="Zone B">Maasai Mara</option>
+                                    <option value="Zone C">Mt Kenya</option>
                                 </select>
                                 <br>
                                 <div class="row d-flex align-items-center mb-4">

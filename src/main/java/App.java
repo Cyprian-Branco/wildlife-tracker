@@ -64,20 +64,21 @@ public class App {
             } catch (IllegalArgumentException exception) {
                 System.out.println("Please fill in all input fields.");
             }
-            response.redirect("/");
+            response.redirect("/sighting-view.hbs");
             return null;
         }), new HandlebarsTemplateEngine());
-        get("/sightings", ((request, response) -> {
+        get("/sighting", ((request, response) -> {
             Map<String, Object> model = new HashMap<>();
             List<Sighting> sightings =Sighting.all();
             model.put("Animal", Animal.class);
             model.put("sightings", sightings);
             return new ModelAndView(model, "sighting-view.hbs");
         }), new HandlebarsTemplateEngine());
-        get("/sightings/:id/delete", (request, response) -> {
+
+        get("/sighting/:id/delete", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             Sighting.find(Integer.parseInt(request.params(":id"))).delete();
-            response.redirect("/sightings");
+            response.redirect("/sighting-view.hbs");
             return null;
         }, new HandlebarsTemplateEngine());
     }
