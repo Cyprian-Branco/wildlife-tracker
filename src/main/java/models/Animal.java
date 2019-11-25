@@ -17,12 +17,10 @@ public class Animal {
         this.age = age;
     }
 
-    public static List<Animal> all() {
-        String sql = "SELECT * FROM animals";
-        try(Connection con = DB.sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(Animal.class);
-        }
+    public Animal() {
+
     }
+
     public String getName() {
         return name;
     }
@@ -33,6 +31,11 @@ public class Animal {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override
