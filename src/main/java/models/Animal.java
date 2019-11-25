@@ -3,6 +3,7 @@ package models;
 import org.sql2o.Connection;
 import org.sql2o.Sql2oException;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Animal {
@@ -16,6 +17,12 @@ public class Animal {
         this.age = age;
     }
 
+    public static List<Animal> all() {
+        String sql = "SELECT * FROM animals";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Animal.class);
+        }
+    }
     public String getName() {
         return name;
     }
@@ -23,6 +30,11 @@ public class Animal {
     public String getAge() {
         return age;
     }
+
+    public int getId() {
+        return id;
+    }
+
     @Override
     public boolean equals (Object o ){
         if(this == o) return true;
