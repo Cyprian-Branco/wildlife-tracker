@@ -85,7 +85,7 @@ public class Sighting {
 
     public static Sighting find(int id) {
         try (Connection con = DB.sql2o.open()) {
-            String sql = "SELECT * FROM sightings where id = :id;";
+            String sql = "SELECT * FROM sightings WHERE id = :id;";
             Sighting sighting = con.createQuery(sql).addParameter("id", id).throwOnMappingFailure(false).executeAndFetchFirst(Sighting.class);
             return sighting;
 
@@ -94,7 +94,7 @@ public class Sighting {
 
     public void delete() {
         try (Connection con = DB.sql2o.open()) {
-            String sql = "DELETE FROM sightings where id = :id;";
+            String sql = "DELETE FROM sightings WHERE id = :id;";
             con.createQuery(sql).addParameter("id", this.id).executeUpdate();
 
         }
