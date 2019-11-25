@@ -2,6 +2,7 @@ import models.Endangered;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,17 @@ public class App {
             model.put("endangeredAnimals", endangeredAnimals);
             return new ModelAndView(model, "endangered-list.hbs");
         }), new HandlebarsTemplateEngine());
+        
+        get("/sighting/new", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Endangered> endangeredAnimals = Endangered.all();
+            List<Object> animals = new ArrayList<Object>();
+            for (int i = 0; i < endangeredAnimals.size(); i++) {
+                animals.add(Endangered.all().get(i));
+            }
+            model.put("animals",animals );
+            return new ModelAndView(model, "sighting-form.hbs");
+        }, new HandlebarsTemplateEngine());
     }
 }
 
