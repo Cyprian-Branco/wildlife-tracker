@@ -6,20 +6,13 @@ import org.sql2o.Sql2oException;
 import java.util.List;
 import java.util.Objects;
 
-public class Animal {
+public abstract class Animal{
     public String name;
-    public String age;
-    public String type;
     public int id;
+    public String age;
     public static final String[] ageArray = {"newborn", "young", "adult"};
-    public Animal (String name, String age){
-        this.name = name;
-        this.age = age;
-    }
 
-    public Animal() {
-
-    }
+    public String type;
 
     public String getName() {
         return name;
