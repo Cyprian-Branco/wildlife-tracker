@@ -25,6 +25,7 @@ public class App {
         } else {
             port = 4567;
         }
+        port(port);
 
 
         get("/", (request, response) -> {
