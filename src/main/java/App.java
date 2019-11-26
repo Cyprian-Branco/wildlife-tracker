@@ -58,16 +58,12 @@ public class App {
             String ranger = request.queryParams("ranger");
             int animalId = Integer.parseInt(request.queryParams("animalId"));
             String location = request.queryParams("location");
-            try {
-                Sighting sighting = new Sighting(ranger,animalId,location);
-                sighting.save();
-            } catch (IllegalArgumentException exception) {
-                System.out.println("Please fill in all input fields.");
-            }
-            response.redirect("/sighting-view.hbs");
+            Sighting sighting = new Sighting(ranger,animalId,location);
+            sighting.save();
+            response.redirect("index.hbs");
             return null;
         }), new HandlebarsTemplateEngine());
-        get("/sighting", ((request, response) -> {
+        get("/sightings", ((request, response) -> {
             Map<String, Object> model = new HashMap<>();
             List<Sighting> sightings =Sighting.all();
             model.put("Animal", Animal.class);
@@ -75,10 +71,10 @@ public class App {
             return new ModelAndView(model, "sighting-view.hbs");
         }), new HandlebarsTemplateEngine());
 
-        get("/sighting/:id/delete", (request, response) -> {
+        get("/sightings/:id/delete", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             Sighting.find(Integer.parseInt(request.params(":id"))).delete();
-            response.redirect("/sighting-view.hbs");
+            response.redirect("/sightings");
             return null;
         }, new HandlebarsTemplateEngine());
     }
