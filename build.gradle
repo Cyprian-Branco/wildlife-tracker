@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-group 'wildlifetracker'
+group 'wildlife-tracker'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
@@ -21,6 +21,6 @@ dependencies {
     compile group: 'com.h2database', name: 'h2', version: '1.4.191'
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.2'
 }
-applicationName = "wildlife-tracker"
-mainClassName = "App"
+applicationName = 'wildlife-tracker'
+mainClassName = 'App'
 task stage(dependsOn: ['clean', 'installDist'])
