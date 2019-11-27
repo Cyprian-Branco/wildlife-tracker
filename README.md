@@ -1,6 +1,7 @@
 # Hero Squad
 
 This is a java application that uses database to track endangered wildlife animals. 
+heroku live link https://wildlifetracker4.herokuapp.com/
 ## Author
 
 * **Cyprian Bowen** 
@@ -35,10 +36,10 @@ $ gradle --version     //gradle version
 After cloning to your local machine navigate to the folder you cloned into and open it with intellij.
 * Navigate into the ``` src/main/java/App.java ``` and click run in intellij.
 * Go to your browser and type ``` localhost:4567 ```
-# In PSQL:
+In PSQL:
  * CREATE DATABASE to_do;
  * CREATE TABLE animals (name varchar, age varchar, type varchar, id serial PRIMARY KEY);
- * CREATE TABLE sightings (ranger varchar, animalId int, location varchar, id serial PRIMARY KEY);
+ * CREATE TABLE sightings (ranger varchar, animalId int, location varchar, seenDate timestamp, id serial PRIMARY KEY);
 
 ## Built With
 
