@@ -27,5 +27,11 @@ public class SightingTest {
         Sighting sighting = new Sighting("Mike", 2, "Tsavo");
         assertEquals("Tsavo", sighting.getLocation());
     }
-
+//    @Test
+//       public void save_assignsIdToObject(){
+//          Sighting sighting = new Sighting("Mike", 2, "Tsavo");
+//          sighting.save();
+//          Sighting savedSighting = Sighting.all().get(0);
+//          assertEquals(sighting.getId(), savedSighting.getId());
+//      }
 }
