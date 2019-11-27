@@ -18,6 +18,17 @@ public class Endangered  extends Animal{
     public String getHealth(){
         return health;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
     public static List<Endangered> all(){
         String sql = "SELECT * FROM animals WHERE type='endangered';";
         try (Connection con = DB.sql2o.open()){
@@ -35,7 +46,7 @@ public class Endangered  extends Animal{
     }
     public void save() {
         try (Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO animals (name, age, health, type) VALUES (:name, :age,:health, :type)";
+            String sql = "INSERT INTO animals (name, age, health, type) VALUES (:name, :age, :health, :type)";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
                     .addParameter("age", this.age)

@@ -41,7 +41,6 @@ public abstract class Animal{
     public int hashcode(){
         return Objects.hash(getName());
     }
-
     public void save(){
         try (Connection con = DB.sql2o.open()){
             String sql = "INSERT INTO animals (name, age, type) VALUES (:name, :age, :type)";

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Integer.parseInt;
 import static spark.Spark.*;
 
 public class App {
@@ -21,7 +22,7 @@ public class App {
         // Otherwise, if they do not, continue using port 4567.
 
         if (process.environment().get("PORT") != null) {
-            port = Integer.parseInt(process.environment().get("PORT"));
+            port = parseInt(process.environment().get("PORT"));
         } else {
             port = 4567;
         }
@@ -58,24 +59,31 @@ public class App {
 
         get("/sighting/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Endangered> endangered = Endangered.all();
-            List<Object> animals = new ArrayList<Object>();
-            for (int i = 0; i < endangered.size(); i++) {
+            List<Endangered> endangeredAnimals = Endangered.all();
+            List<Object> animals = new ArrayList<>();
+            for (int i=0;i<endangeredAnimals.size();i++){
                 animals.add(Endangered.all().get(i));
             }
+
             model.put("animals",animals );
             return new ModelAndView(model, "sighting-form.hbs");
         }, new HandlebarsTemplateEngine());
-        post("/sighting/new", ((request, response) -> {
+        post("/sighting/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             String ranger = request.queryParams("ranger");
-            int animalId = Integer.parseInt(request.queryParams("animalId"));
+            int animalId = parseInt(request.queryParams("animalId"));
             String location = request.queryParams("location");
-            Sighting sighting = new Sighting(ranger,animalId,location);
-            sighting.save();
-            response.redirect("index.hbs");
+            try {
+                Sighting sighting = new Sighting(ranger,animalId,location);
+                sighting.save();
+            } catch (IllegalArgumentException exception) {
+                System.out.println("Please fill in all input fields.");
+            }
+            response.redirect("/");
+
             return null;
-        }), new HandlebarsTemplateEngine());
+
+        }, new HandlebarsTemplateEngine());
         get("/sightings", ((request, response) -> {
             Map<String, Object> model = new HashMap<>();
             List<Sighting> sightings =Sighting.all();
@@ -86,7 +94,7 @@ public class App {
 
         get("/sightings/:id/delete", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            Sighting.find(Integer.parseInt(request.params(":id"))).delete();
+            Sighting.find(parseInt(request.params(":id"))).delete();
             response.redirect("/sightings");
             return null;
         }, new HandlebarsTemplateEngine());
