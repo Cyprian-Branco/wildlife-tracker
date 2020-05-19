@@ -6,23 +6,14 @@ import org.sql2o.Sql2oException;
 import java.util.List;
 import java.util.Objects;
 
-public class Animal {
+public abstract class Animal{
     public String name;
-    public String age;
-    public String type;
     public int id;
+    public String age;
     public static final String[] ageArray = {"newborn", "young", "adult"};
-    public Animal (String name, String age){
-        this.name = name;
-        this.age = age;
-    }
 
-    public static List<Animal> all() {
-        String sql = "SELECT * FROM animals";
-        try(Connection con = DB.sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(Animal.class);
-        }
-    }
+    public String type;
+
     public String getName() {
         return name;
     }
@@ -33,6 +24,11 @@ public class Animal {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override
@@ -60,7 +56,7 @@ public class Animal {
     }
     public static Animal find(int id) {
         try (Connection con = DB.sql2o.open()) {
-            String sql = "SELECT * FROM animals where id = :id;";
+            String sql = "SELECT * FROM animals WHERE id = :id;";
             Animal animal = con.createQuery(sql).addParameter("id", id).throwOnMappingFailure(false).executeAndFetchFirst(Animal.class);
             return animal;
         }

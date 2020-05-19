@@ -1,0 +1,47 @@
+{{#partial "content"}}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-3">
+                <div class="form-dark">
+                    <div class="card card-image" style="background-image: url('/images/download.jpg');">
+                            <div class="text-center">
+                                <h3 class="amber-text mb-5 mt-4 font-weight-bold"><strong>ENDANGERED</strong> <a
+                                        class="amber-text font-weight-bold"><strong> ANIMAL</strong></a></h3>
+                            </div>
+                            <br>
+                            <form action="/endangered/new" method="post">
+                                <label class="color" for="name">Animal Name</label>
+                                <input type="text" id="name" class="form-control" name="name">
+                                <br>
+                                <label for="type">Age</label>
+                                <br>
+                                <select class="browser-default custom-select" id="age" name="age">
+                                    <option selected>Select Age</option>
+                                    <option value="newborn">New born</option>
+                                    <option value="young">Young</option>
+                                    <option value="adult">Adult</option>
+                                </select>
+                                <br>
+                                <label for="type">Health</label>
+                                <br>
+                                <select id="health" name="health" class="browser-default custom-select">
+                                    <option selected>Select Health of Animal</option>
+                                    <option value="healthy">Healthy</option>
+                                    <option value="ill">sick</option>
+                                    <option value="okay">Okay</option>
+                                </select>
+                                <br>
+                                <div class="row d-flex align-items-center mb-4">
+                                    <br>
+                                    <div class="text-center mb-3 col-md-12">
+                                        <button type="submit" class="btn peach-gradient z-depth-1">SUBMIT</button>
+                                    </div>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/partial}}
+{{> layout.hbs}}

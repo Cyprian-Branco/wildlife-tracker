@@ -1,0 +1,55 @@
+{{#partial "content"}}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-3">
+                <div class="form-dark">
+                        <div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
+                            <div class="text-center">
+                                <h3 class="amber-text mb-5 mt-4 font-weight-bold"><strong>ADD</strong> <a
+                                        class="amber-text font-weight-bold"><strong> SIGHTING</strong></a></h3>
+                            </div>
+                            <hr>
+                            <form action="/sighting/new" method="post">
+                                <label for="ranger">Ranger Name</label>
+                                <input type="text" id="ranger" class="form-control" name="ranger">
+                                <br>
+                                <label for="animalId">Animal</label>
+                                <br>
+                                <select class="browser-default custom-select" id="animalId" name="animalId">
+                                    <option selected>Select Animal</option>
+                                    <option value="Lion">Lion</option>
+                                    <option value="Rhino">Rhino</option>
+                                    <option value="Leopard">Leopard</option>
+                                    <option value="Elephant">Elephant</option>
+                                    <option value="Giraffe">Giraffe</option>
+                                    <option value="Cheetah">Cheetah</option>
+                                    {{#each animals}}
+                                        <option value="{{id}}">{{name}}</option>
+                                    {{/each}}
+                                </select>
+                                <br>
+                                <label for="location">Location</label>
+                                <br>
+                                <select class="browser-default custom-select" id="location" name="location">
+                                    <option selected>Select Location</option>
+                                    <option value="Tsavo">Tsavo</option>
+                                    <option value="Maasai">Maasai Mara</option>
+                                    <option value="Mt Kenya">Mt Kenya</option>
+                                </select>
+                                <br>
+                                <div class="row d-flex align-items-center mb-4">
+                                    <br>
+                                    <br>
+                                    <div class="text-center mb-3 col-md-12">
+                                        <button type="submit" class="bt-btn">SUBMIT</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/partial}}
+{{> layout.hbs}}
